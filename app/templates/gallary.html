@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECE1779 A1</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/Style.css')}}">   
+    <link rel="shortcut icon" href="{{ url_for('static', filename='styles/favicon.ico') }}">
+</head>
+<body>
+    <image src="{{ url_for('static', filename='images/LogoReversedBlue.jpg')}}" class="logo"/>
+    <form action={{url_for('logout_submit')}} method="post">
+    	<input  class="signout" type="submit" value="SIGN OUT"/>
+    </form>
+    <div class="image">
+	<table>
+    	    {% for count in countList %}
+	    <tr>
+		<td><a href="{{url_for('detail',id=idList[count])}}"><img id={{idList[count]}} src="data:image/{{formatList[count]}};base64,{{b64List[count]}}" height="100px"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

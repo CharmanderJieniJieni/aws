@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='error'>{{error_msg if error_msg != None}}</div>
+ <form class="form" action="{{url_for('ec2_autoScale')}}" method="post">
+    <table >
+ 	<tr>Auto Scale section</tr><br><br>
+	<tr>Current Status: <label type="text"/>{{status if status != None}}</tr><br><br>
+    	<tr>
+	    <label>CPU Threshold for growing the worker pool</label>
+	    <input type="text" name="threshExpand" value="{{growCPU if growCPU != None}}">
+	</tr><br><br>
+	<tr>
+	    <label>CPU Threshold for shrinking the worker pool</label>
+	    <input type="text" name="threShrink" value="{{shrinkCPU if shrinkCPU != None}}">
+	</tr><br><br>
+        <tr>
+	    <label>Ratio of expanding worker pool</label>
+	    <input type="text" name="ratioExpand" value="{{ratExp if ratExp != None}}">
+        </tr><br><br>
+        <tr>
+	    <label>Ratio of shrinking worker pool</label>
+	    <input type="text" name="ratioShrink" value="{{ratShrink if ratShrink != None}}">
+	</tr><br><br>
+    </table>
+    <input type="submit" value="Start">
+    <div class ="btnStop" ><a href="{{url_for('ec2_autoScale_stop')}}">Stop</a></div>
+    </form>
+
+
+    <form class="form" action="{{url_for('ec2_create')}}" method="POST">
+              <input type="submit" value="New EC2 instance">
+            </form>
+
+    <form class="form" action="{{url_for('delete')}}" method="get">
+         <input type="submit" value="Delete all data and images">
+    </form>
+    <table class="form"/>
+    <thead>
+       <th>ID</th>
+       <th>Type</th>
+       <th>Availability Zone</th>
+       <th>Status</th>
+       <th>CPU utilization</th>
+    </thead>
+    {% for instance in instances if instance.instance_type != "t2.micro" %} 
+        <tr >
+            <td>{{ instance.id }}</td>
+            <td>{{ instance.instance_type }}</td>
+            <td>{{ instance.placement['AvailabilityZone']}}</td>
+            <td>{{ instance.state['Name'] }}</td>
+	    <td>{{ CPU_list[loop.index0] }}</td>
+            <td>
+            <form action="{{url_for('ec2_view',id=instance.id)}}" method='get'>
+                    <input type='submit' value='Details' />
+                </form>
+            </td>
+         
+            <td>
+             {% if instance.state['Name'] == "running"  %}
+             <form action="{{url_for('ec2_destroy',id=instance.id)}}" method='post' onsubmit='return confirm("Are you sure?")'>
+                    <input type='submit' value='Destroy' />
+                </form>
+             {% endif %}
+            </td>
+        </tr><br>	
+    {% endfor %}
+    </table>
+    
+{% endblock %}

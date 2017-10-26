@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECE1779 A1</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/Style.css')}}">
+    <image src="{{ url_for('static', filename='images/LogoReversedBlue.jpg')}}" class="logo"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='styles/favicon.ico') }}">
+</head>
+<body>
+    <div class="login-page">
+    <form class="form">
+        <a href="{{ url_for('login')}}" class="fontbold">Login</a><br><br>
+	<a href="{{ url_for('register')}}"class="fontbold">Register</a>   
+    </form>
+    </div>
+</body>
+</html>

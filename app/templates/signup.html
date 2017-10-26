@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+     <link rel="shortcut icon" href="{{ url_for('static', filename='styles/favicon.ico') }}">
+</head>
+<body>
+    <form method="post" action="signup_submit">
+        <div>
+            <label>Username:</label>
+            <input type="text" name="username">
+        </div>
+
+        <div>
+            <label>Password:</label>
+            <input type="password" name="password">
+        </div>
+
+        <input type="submit" value="sign up" />
+    </form>
+</body>
+</html>

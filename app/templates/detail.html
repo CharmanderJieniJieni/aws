@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECE1779 A1</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/Style.css')}}">
+    <image src="{{ url_for('static', filename='images/LogoReversedBlue.jpg')}}" class="logo"/>
+</head>
+<body>
+    <div class="image">
+	<table>
+    	    {% for count in countList %}
+	    <tr>
+                <td><label class="error">transform: {{descrip[count]}}</label></td><br>
+		<td><img src="data:image/{{formatList[count]}};base64,{{b64List[count]}}"></td>           
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

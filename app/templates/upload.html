@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>uploadForm</title> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/Style.css')}}">
+
+     <link rel="shortcut icon" href="{{ url_for('static', filename='styles/favicon.ico') }}">
+  </head>
+  
+  <body>   
+    <image src="{{ url_for('static', filename='images/LogoReversedBlue.jpg')}}" class="logo"/>
+    <form action={{url_for('logout_submit')}} method="post">
+    	<input  class="signout" type="submit" value="SIGN OUT"/>
+    </form>
+    <div class="login-page">
+     <h1 class="welcome">Upload Form</h1>
+     <form action="/test/FileUpload"  enctype="multipart/form-data" method="post" class="form">
+       {% if not authenticated %}
+       <label class="lbl">User ID</label><input type="text" name="userID"><br />
+       <label class="lbl">Password</label><input type="text" name="password"><br />
+       {% endif %}
+
+   	What is the image files to upload? <input type="file" name="uploadedfile"><br />
+
+   	<input type="submit" value="Send">
+	<input type="reset">
+    </form>
+    </div>
+  </body>
+</html>

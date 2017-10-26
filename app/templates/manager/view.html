@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="signout" action='{{url_for("ec2_list")}}' method='get'>
+        <input type='submit' value='Back' />
+    </form>
+
+    <table class="form">
+        <tr><td>ID</td><td> {{ instance.id }}</td></tr>
+        <tr><td>Image AMI ID</td><td> {{ instance.image_id }}</td></tr>
+        <tr><td>Key Pair </td><td> {{ instance.key_name }}</td></tr>
+        <tr><td>Public IP Address</td><td>{{ instance.public_ip_address }}</td></tr>
+        <tr><td>State</td><td>{{ instance.state['Name'] }}</td></tr>
+    </table><br><br>
+
+
+    <h2 class="form">CPU</h2>
+
+    <div class="form" id="cpu_plot" style="width:500px;height:250px"></div><br><br>
+
+    <h2 class="form">Network In</h2>
+
+    <div id="net_in_plot" class="form" style="width:500px;height:250px"></div><br><br>
+
+
+    <h2 class="form">Network Out</h2>
+
+    <div id="net_out_plot" class="form" style="width:500px;height:250px"></div><br><br>
+
+
+    <script>
+
+        var options = {
+            series: {
+                lines: { show: true },
+                points: { show: true }
+            }
+        };
+
+
+        $.plot($("#cpu_plot"), [ {{ cpu_stats }} ] , options);
+        $.plot($("#net_in_plot"), [ {{ net_in_stats }} ] , options);
+        $.plot($("#net_out_plot"), [ {{ net_out_stats }} ] , options);
+
+    </script>
+
+{% endblock %}

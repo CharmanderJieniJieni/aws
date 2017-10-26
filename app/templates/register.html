@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/Style.css')}}">
+	<image src="{{ url_for('static', filename='images/LogoReversedBlue.jpg')}}" class="logo"/>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='styles/favicon.ico') }}">
+</head>
+<body>
+<div class='error'>{{error_msg if error_mag != None}}</div>
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" method="post" action="{{ url_for('register_submit') }}">
+      <input name ="username" type="text" placeholder="username"/>
+      <input name="password" type="password" placeholder="password"/>
+      <input name="pwconfirm" type="password" placeholder="confirm password"/>
+      <input type="submit" value="create"></input>
+	  <p class="message">Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

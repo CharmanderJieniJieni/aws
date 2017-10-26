@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   	<meta charset="UTF-8">
+    	<title>ECE1779 A1</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/Style.css')}}">
+</head>
+<body>
+<div class="login-page">
+    <form class="form" method="post" action="{{ url_for('logout_submit') }}">
+      <input type="submit" value="signout"></input>
+    </form>
+    <form class="form" method="get" action="{{ url_for('landing') }}">
+      <input type="submit" value="Go to landing page"></input>
+    </form>
+  </div>
+</div>
+</body>
+</html>
